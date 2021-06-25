@@ -38,7 +38,7 @@ namespace generar_en_core
 
 
             //configuracion de la fuente del tamano de pagina y margenes del pdf: 
-            Document doc = new Document(PageSize.LETTER, 5, 5, 7, 7);
+            Document doc = new Document(PageSize.A7.Rotate(), 5, 5, 7, 7);
             // instancia q tiene como parametro el boosquejo del doc y la ubicacion donde generara:
             PdfWriter pdw = PdfWriter.GetInstance(doc, fs);
 
@@ -49,14 +49,130 @@ namespace generar_en_core
             doc.AddTitle("se logro banda");
             iTextSharp.text.Font standarfont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
+            //configuro los tipos de fuente que tenfra el pdf
+            iTextSharp.text.Font timesRoman1 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+            iTextSharp.text.Font timesRoman2 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 5, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            iTextSharp.text.Font timesRoman3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 8, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+            iTextSharp.text.Font normal = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.UNDEFINED, 5, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
+            // obtengo la imagen de los recursos del proyecto
+            iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(generar_en_core.Properties.Resources.HAPA_logo_transparente, System.Drawing.Imaging.ImageFormat.Png);
+            logo.ScalePercent(10);
             
+            //creo la tabla que agregare al documento pdf
+            var table = new PdfPTable(new float[] { 15f, 30f, 15f, 40f }) { WidthPercentage = 100 };
+
+            //creo las celdas
+            var c1 = new PdfPCell(new Phrase("-----------", timesRoman1)); // se coloco para darle formato
+            var c2 = new PdfPCell(new Phrase("------------------------", timesRoman1));
+            var c3 = new PdfPCell(new Phrase("-----------", timesRoman1)); // se coloco para darle formato
+            var c4 = new PdfPCell(logo) { Rowspan = 3};
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+
             
 
-            // con esto mando a escribir lo que quiero al pdf, en este caso un variable de tipo string:
-            doc.Add(new Paragraph(dir2));
-            //esto lo unico que hace es un salto de linea 
-            doc.Add(Chunk.NEWLINE);
+            c1.Phrase = new Phrase(new Phrase("", timesRoman1));
+            c2.Phrase = new Phrase(new Phrase("HAPA COVID-19", timesRoman1));
+            c3.Phrase = new Phrase(new Phrase("", normal));
+        
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
 
+            c1.Phrase = new Phrase(new Phrase("", timesRoman1));
+            c2.Phrase = new Phrase(new Phrase("Healt Aid Program Against Covid-19", timesRoman2));
+            c3.Phrase = new Phrase(new Phrase("", normal));
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+
+            c1 = new PdfPCell(new Phrase("-----------", timesRoman1)); // se coloco para darle formato
+            c2 = new PdfPCell(new Phrase("------------------------", timesRoman1));
+            c3 = new PdfPCell(new Phrase("-----------", timesRoman1)); // se coloco para darle formato
+            c4 = new PdfPCell(new Phrase("-----------------------", timesRoman1)); // se coloco para darle formato
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+
+            c1 = new PdfPCell(new Phrase("Fecha:", timesRoman3)); // se coloco para darle formato
+            c2 = new PdfPCell(new Phrase("", timesRoman1));
+            c3 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
+            c4 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+
+
+            c1 = new PdfPCell(new Phrase("Hora:", timesRoman3)); // se coloco para darle formato
+            c2 = new PdfPCell(new Phrase("", timesRoman1));
+            c3 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
+            c4 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+
+
+            c1 = new PdfPCell(new Phrase("Lugar:", timesRoman3)); // se coloco para darle formato
+            c2 = new PdfPCell(new Phrase("", timesRoman1));
+            c3 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
+            c4 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+
+
+            doc.Add(table);
             doc.Close();
             pdw.Close();
 
