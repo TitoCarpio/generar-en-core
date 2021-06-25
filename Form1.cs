@@ -52,14 +52,16 @@ namespace generar_en_core
             //configuro los tipos de fuente que tenfra el pdf
             iTextSharp.text.Font timesRoman1 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
             iTextSharp.text.Font timesRoman2 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 5, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+            iTextSharp.text.Font timesRoman3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 7, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+            iTextSharp.text.Font timesRoman4 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 5, iTextSharp.text.Font.BOLD, BaseColor.WHITE);
 
-            iTextSharp.text.Font timesRoman3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 8, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
             iTextSharp.text.Font normal = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.UNDEFINED, 5, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
             // obtengo la imagen de los recursos del proyecto
             iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(generar_en_core.Properties.Resources.HAPA_logo_transparente, System.Drawing.Imaging.ImageFormat.Png);
             logo.ScalePercent(10);
             
+
             //creo la tabla que agregare al documento pdf
             var table = new PdfPTable(new float[] { 15f, 30f, 15f, 40f }) { WidthPercentage = 100 };
 
@@ -101,75 +103,15 @@ namespace generar_en_core
             table.AddCell(c2);
             table.AddCell(c3);
 
-            c1 = new PdfPCell(new Phrase("-----------", timesRoman1)); // se coloco para darle formato
-            c2 = new PdfPCell(new Phrase("------------------------", timesRoman1));
-            c3 = new PdfPCell(new Phrase("-----------", timesRoman1)); // se coloco para darle formato
-            c4 = new PdfPCell(new Phrase("-----------------------", timesRoman1)); // se coloco para darle formato
+            marco(table);
 
-            //////quito los bordes de las celdas.
-            c1.Border = 0;
-            c2.Border = 0;
-            c3.Border = 0;
-            c4.Border = 0;
-
-            //////agrego las celdas a mi tabla
-            table.AddCell(c1);
-            table.AddCell(c2);
-            table.AddCell(c3);
-            table.AddCell(c4);
-
-            c1 = new PdfPCell(new Phrase("Fecha:", timesRoman3)); // se coloco para darle formato
-            c2 = new PdfPCell(new Phrase("", timesRoman1));
-            c3 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
-            c4 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
-
-            //////quito los bordes de las celdas.
-            c1.Border = 0;
-            c2.Border = 0;
-            c3.Border = 0;
-            c4.Border = 0;
-
-            //////agrego las celdas a mi tabla
-            table.AddCell(c1);
-            table.AddCell(c2);
-            table.AddCell(c3);
-            table.AddCell(c4);
-
-
-            c1 = new PdfPCell(new Phrase("Hora:", timesRoman3)); // se coloco para darle formato
-            c2 = new PdfPCell(new Phrase("", timesRoman1));
-            c3 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
-            c4 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
-
-            //////quito los bordes de las celdas.
-            c1.Border = 0;
-            c2.Border = 0;
-            c3.Border = 0;
-            c4.Border = 0;
-
-            //////agrego las celdas a mi tabla
-            table.AddCell(c1);
-            table.AddCell(c2);
-            table.AddCell(c3);
-            table.AddCell(c4);
-
-
-            c1 = new PdfPCell(new Phrase("Lugar:", timesRoman3)); // se coloco para darle formato
-            c2 = new PdfPCell(new Phrase("", timesRoman1));
-            c3 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
-            c4 = new PdfPCell(new Phrase("", timesRoman1)); // se coloco para darle formato
-
-            //////quito los bordes de las celdas.
-            c1.Border = 0;
-            c2.Border = 0;
-            c3.Border = 0;
-            c4.Border = 0;
-
-            //////agrego las celdas a mi tabla
-            table.AddCell(c1);
-            table.AddCell(c2);
-            table.AddCell(c3);
-            table.AddCell(c4);
+            saltoLinea(table);
+            saltoLinea(table);
+            fecha(table);
+            saltoLinea(table);
+            hora(table);
+            saltoLinea(table);
+            lugar(table);
 
 
             doc.Add(table);
@@ -177,6 +119,117 @@ namespace generar_en_core
             pdw.Close();
 
             //NOTA: solo apreta una vez el bton que se me olvido poner el message box que confiema la creacion del pdf XD
+        }
+
+        private void marco(PdfPTable table)
+        {
+            //Configuracion de la fuente
+            iTextSharp.text.Font timesRoman1 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            var c1 = new PdfPCell(new Phrase("-----------", timesRoman1)); // se coloco para darle formato
+            var c2 = new PdfPCell(new Phrase("------------------------", timesRoman1));
+            var c3 = new PdfPCell(new Phrase("-----------", timesRoman1)); // se coloco para darle formato
+            var c4 = new PdfPCell(new Phrase("-----------------------", timesRoman1)); // se coloco para darle formato
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+        }
+
+        private void saltoLinea (PdfPTable table)
+        {
+            //configuracion de la fuente del texto
+            iTextSharp.text.Font timesRoman4 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 5, iTextSharp.text.Font.BOLD, BaseColor.WHITE);
+
+            var c1 = new PdfPCell(new Phrase(".", timesRoman4)); // se coloco para darle formato
+            var c2 = new PdfPCell(new Phrase(".", timesRoman4));
+            var c3 = new PdfPCell(new Phrase(".", timesRoman4)); // se coloco para darle formato
+            var c4 = new PdfPCell(new Phrase(".", timesRoman4)); // se coloco para darle formato
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+        }
+
+        private void fecha (PdfPTable table)
+        {
+            iTextSharp.text.Font timesRoman3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 7, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            var c1 = new PdfPCell(new Phrase("Fecha:", timesRoman3)); // se coloco para darle formato
+            var c2 = new PdfPCell(new Phrase("", timesRoman3));
+            var c3 = new PdfPCell(new Phrase("", timesRoman3)); // se coloco para darle formato
+            var c4 = new PdfPCell(new Phrase("", timesRoman3)); // se coloco para darle formato
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+        }
+
+        private void hora(PdfPTable table)
+        {
+            iTextSharp.text.Font timesRoman3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 7, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            var c1 = new PdfPCell(new Phrase("Hora:", timesRoman3)); // se coloco para darle formato
+            var c2 = new PdfPCell(new Phrase("", timesRoman3));
+            var c3 = new PdfPCell(new Phrase("", timesRoman3)); // se coloco para darle formato
+            var c4 = new PdfPCell(new Phrase("", timesRoman3)); // se coloco para darle formato
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
+        }
+
+        private void lugar(PdfPTable table)
+        {
+            iTextSharp.text.Font timesRoman3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 7, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            var c1 = new PdfPCell(new Phrase("Lugar:", timesRoman3)); // se coloco para darle formato
+            var c2 = new PdfPCell(new Phrase("", timesRoman3));
+            var c3 = new PdfPCell(new Phrase("", timesRoman3)); // se coloco para darle formato
+            var c4 = new PdfPCell(new Phrase("", timesRoman3)); // se coloco para darle formato
+
+            //////quito los bordes de las celdas.
+            c1.Border = 0;
+            c2.Border = 0;
+            c3.Border = 0;
+            c4.Border = 0;
+
+            //////agrego las celdas a mi tabla
+            table.AddCell(c1);
+            table.AddCell(c2);
+            table.AddCell(c3);
+            table.AddCell(c4);
         }
     }
 }
